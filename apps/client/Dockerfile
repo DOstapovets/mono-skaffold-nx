@@ -4,7 +4,7 @@ FROM node:22 AS development
 WORKDIR /app
 
 # Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock nx.json  ./
 COPY packages/common/package.json ./packages/common/
 COPY apps/client/package.json ./apps/client/
 

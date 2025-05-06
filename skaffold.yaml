@@ -59,7 +59,7 @@ deploy:
 
 profiles:
   # Development profile
-  - name: dev
+  - name: development
     activation:
       - command: dev
     patches:
