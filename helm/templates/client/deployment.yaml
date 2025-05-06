@@ -1,0 +1,49 @@
+{{- if .Values.client.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "client.fullname" . }}
+  labels:
+    {{- include "client.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.client.replicaCount | default 1 }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Release.Name }}
+      app.kubernetes.io/component: client
+  template:
+    metadata:
+      labels:
+        {{- include "client.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: client
+          image: "{{ .Values.client.image.repository }}:{{ .Values.client.image.tag }}"
+          imagePullPolicy: {{ .Values.client.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.client.livenessProbe.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.client.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.client.livenessProbe.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.client.readinessProbe.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.client.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.client.readinessProbe.periodSeconds }}
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+          resources:
+            {{- toYaml .Values.client.resources | nindent 12 }}            
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: {{ include "client.fullname" . }}-nginx-config
+{{- end }}

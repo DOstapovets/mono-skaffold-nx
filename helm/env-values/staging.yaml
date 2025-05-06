@@ -1,0 +1,68 @@
+# Staging environment configuration values
+
+# Replicas for each service
+replicas:
+  client: 2
+  server: 2
+
+# Resource limits and requests
+resources:
+  client:
+    limits:
+      cpu: 300m
+      memory: 384Mi
+    requests:
+      cpu: 150m
+      memory: 192Mi
+  server:
+    limits:
+      cpu: 500m
+      memory: 768Mi
+    requests:
+      cpu: 250m
+      memory: 384Mi
+
+# Environment variables for staging
+environment:
+  NODE_ENV: production
+  LOG_LEVEL: info
+  ENABLE_SWAGGER: "true"
+
+# Staging-specific settings
+staging:
+  monitoringEnabled: true
+  backupEnabled: true
+
+# Ingress configuration for staging
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - host: staging.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: client
+          servicePort: 3001
+        - path: /api
+          pathType: Prefix
+          serviceName: server
+          servicePort: 3000
+  tls:
+    - secretName: staging-tls-secret
+      hosts:
+        - staging.example.com
+
+# Redis configuration for staging
+redis:
+  persistence: true
+  resources:
+    limits:
+      cpu: 300m
+      memory: 512Mi
+    requests:
+      cpu: 150m
+      memory: 256Mi

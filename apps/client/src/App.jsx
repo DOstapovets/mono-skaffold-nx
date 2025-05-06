@@ -14,12 +14,11 @@ function App() {
     <div className="app-container">
       <header>
         <h1>Simple TODO List App</h1>
-        <ServerStatus />
       </header>
 
       <main>
         <div className="app-section">
-          <h2>Todo Management</h2>
+          <h2>Todo</h2>
           <div className="todo-management">
             <TodoForm onTodoAdded={handleTodoAdded} />
             <TodoList refreshTrigger={refreshTodos} />
@@ -32,7 +31,8 @@ function App() {
       </main>
 
       <footer>
-        <p>Connected to Express backend at {import.meta.env.VITE_BACKEND_URL}</p>
+        <p>Connected to Express backend</p>
+        <ServerStatus />
       </footer>
     </div>
   );

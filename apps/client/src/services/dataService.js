@@ -12,7 +12,6 @@ const dataService = {
       throw error;
     }
   },
-
   // Get server health status
   getHealthStatus: async () => {
     try {

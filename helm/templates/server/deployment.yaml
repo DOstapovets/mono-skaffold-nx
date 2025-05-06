@@ -1,0 +1,46 @@
+{{- if .Values.server.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "server.fullname" . }}
+  labels:
+    {{- include "server.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.server.replicaCount | default 1 }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Release.Name }}
+      app.kubernetes.io/component: server
+  template:
+    metadata:
+      labels:
+        {{- include "server.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: server
+          image: "{{ .Values.server.image.repository }}:{{ .Values.server.image.tag }}"
+          imagePullPolicy: {{ .Values.server.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.server.service.targetPort }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.server.livenessProbe.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.server.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.server.livenessProbe.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.server.readinessProbe.path }}
+              port: http
+            initialDelaySeconds: {{ .Values.server.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.server.readinessProbe.periodSeconds }}
+          env:
+            {{- range $key, $value := .Values.server.env }}
+            - name: {{ $key }}
+              value: "{{ tpl (toString $value) $ }}"
+            {{- end }}
+          resources:
+            {{- toYaml .Values.server.resources | nindent 12 }}
+{{- end }}

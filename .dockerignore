@@ -13,5 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 dist
 build
+helm
 .vscode
 .idea

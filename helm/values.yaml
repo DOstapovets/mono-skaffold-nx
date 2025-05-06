@@ -1,0 +1,114 @@
+# Default values for the application
+
+global:
+  environment: production
+
+client:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: my-app-client
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 3001
+    targetPort: 3001
+  livenessProbe:
+    path: /
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readinessProbe:
+    path: /
+    initialDelaySeconds: 5
+    periodSeconds: 5
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+server:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: my-app-server
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 3000
+    targetPort: 3000
+  livenessProbe:
+    path: /health
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readinessProbe:
+    path: /health
+    initialDelaySeconds: 5
+    periodSeconds: 5
+  env:
+    NODE_ENV: production
+    PORT: 3000
+    # Redis connection environment variables
+    REDIS_HOST: "{{ .Release.Name }}-redis-master"
+    REDIS_PORT: 6379
+  resources:
+    limits:
+      cpu: 300m
+      memory: 512Mi
+    requests:
+      cpu: 150m
+      memory: 256Mi
+
+# Ingress configuration
+ingress:
+  enabled: false  # Disabled by default, enable in environment-specific values
+  className: "nginx"  # Use the NGINX ingress controller by default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # Add annotations for SSL with cert-manager
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+    # Add annotations for rate limiting, if needed
+    # nginx.ingress.kubernetes.io/rate-limit-rps: "10"
+  hosts:
+    - host: app.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          serviceName: client
+          servicePort: 3001
+        - path: /api
+          pathType: Prefix
+          serviceName: server
+          servicePort: 3000
+        - path: /health
+          pathType: Prefix
+          serviceName: server
+          servicePort: 3000
+  tls: []
+  # - secretName: app-tls-secret
+  #   hosts:
+  #     - app.example.com
+
+# Redis configuration
+redis:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: false  # Disable authentication for simplicity in development
+  master:
+    persistence:
+      enabled: true
+      size: 1Gi
+  replica:
+    replicaCount: 0  # No replicas for development
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 100m
+    limits:
+      memory: 256Mi
+      cpu: 200m
