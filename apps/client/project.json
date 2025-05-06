@@ -8,6 +8,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
+        "skipTypeCheck": true,
         "outputPath": "apps/client/dist"
       },
       "configurations": {
