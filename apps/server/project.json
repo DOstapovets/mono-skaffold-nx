@@ -3,16 +3,6 @@
   "projectType": "application",
   "sourceRoot": "apps/server",
   "targets": {
-    "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "apps/server/dist",
-        "main": "apps/server/index.js",
-        "tsConfig": "apps/server/tsconfig.json",
-        "assets": ["apps/server/assets"]
-      }
-    },
     "serve": {
       "executor": "nx:run-commands",
       "options": {
