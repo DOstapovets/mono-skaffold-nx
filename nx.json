@@ -12,7 +12,7 @@
       "options": {
         "push": true,
         "baseBranch": "master",
-        "postTargets": ["build", "github"]
+        "postTargets": ["github"]
       }
     },
     "github": {
