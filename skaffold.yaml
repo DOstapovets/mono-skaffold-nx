@@ -1,0 +1,194 @@
+apiVersion: skaffold/v2beta28
+kind: Config
+metadata:
+  name: my-app
+
+build:
+  artifacts:
+    - image: my-app-client
+      context: .
+      docker:
+        dockerfile: apps/client/Dockerfile
+        target: production
+    - image: my-app-server
+      context: .
+      docker:
+        dockerfile: apps/server/Dockerfile
+        target: production
+
+deploy:
+  helm:
+    releases:
+      - name: my-app
+        chartPath: ./helm-chart
+        valuesFiles:
+          - ./helm-chart/values.yaml
+        namespace: default
+
+portForward:
+  # Port forward the client service
+  - resourceType: service
+    resourceName: my-app-client
+    namespace: default
+    port: 80
+    localPort: 5173 # Forward to local port 3001
+  # Port forward the server service
+  - resourceType: service
+    resourceName: my-app-server
+    namespace: default
+    port: 3000
+    localPort: 3000 # Forward to local port 3000
+
+profiles:
+  # Development profile with hot-reload
+  - name: dev
+    build:
+      artifacts:
+        - image: my-app-client
+          context: .
+          docker:
+            dockerfile: apps/client/Dockerfile
+            target: development
+        - image: my-app-server
+          context: .
+          docker:
+            dockerfile: apps/server/Dockerfile
+            target: development
+    deploy:
+      helm:
+        releases:
+          - name: my-app-dev
+            chartPath: ./helm-chart
+            valuesFiles:
+              - ./helm-chart/values.yaml
+            namespace: default
+            setValues:
+              global.environment: development
+              client.replicaCount: 1
+              server.replicaCount: 1
+              server.env.NODE_ENV: development
+    portForward:
+      # Port forward the client service in dev mode
+      - resourceType: service
+        resourceName: my-app-dev-client
+        namespace: default
+        port: 80
+        localPort: 3001 # Forward to local port 3001
+      # Port forward the server service in dev mode
+      - resourceType: service
+        resourceName: my-app-dev-server
+        namespace: default
+        port: 3000
+        localPort: 3000 # Forward to local port 3000
+
+  # Staging profile
+  - name: staging
+    deploy:
+      helm:
+        releases:
+          - name: my-app-staging
+            chartPath: ./helm-chart
+            valuesFiles:
+              - ./helm-chart/values.yaml
+            namespace: staging
+            setValues:
+              global.environment: staging
+              client.replicaCount: 2
+              server.replicaCount: 2
+              server.env.NODE_ENV: staging
+    portForward:
+      # Port forward the client service in staging
+      - resourceType: service
+        resourceName: my-app-staging-client
+        namespace: staging
+        port: 80
+        localPort: 3001 # Forward to local port 3001
+      # Port forward the server service in staging
+      - resourceType: service
+        resourceName: my-app-staging-server
+        namespace: staging
+        port: 3000
+        localPort: 3000 # Forward to local port 3000
+
+  # Production profile
+  - name: production
+    deploy:
+      helm:
+        releases:
+          - name: my-app-prod
+            chartPath: ./helm-chart
+            valuesFiles:
+              - ./helm-chart/values.yaml
+            namespace: production
+            setValues:
+              global.environment: production
+              client.replicaCount: 3
+              server.replicaCount: 3
+              server.env.NODE_ENV: production
+    portForward:
+      # Port forward the client service in production
+      - resourceType: service
+        resourceName: my-app-prod-client
+        namespace: production
+        port: 80
+        localPort: 3001 # Forward to local port 3001
+      # Port forward the server service in production
+      - resourceType: service
+        resourceName: my-app-prod-server
+        namespace: production
+        port: 3000
+        localPort: 3000 # Forward to local port 3000
+
+  # Client-only profile
+  - name: client-only
+    build:
+      artifacts:
+        - image: my-app-client
+          context: .
+          docker:
+            dockerfile: apps/client/Dockerfile
+            target: production
+    deploy:
+      helm:
+        releases:
+          - name: my-app-client
+            chartPath: ./helm-chart
+            valuesFiles:
+              - ./helm-chart/values.yaml
+            namespace: default
+            setValues:
+              server.enabled: false
+    portForward:
+      # Port forward only the client service
+      - resourceType: service
+        resourceName: my-app-client-client
+        namespace: default
+        port: 80
+        localPort: 3001 # Forward to local port 3001
+
+  # Server-only profile
+  - name: server-only
+    build:
+      artifacts:
+        - image: my-app-server
+          context: .
+          docker:
+            dockerfile: apps/server/Dockerfile
+            target: production
+    deploy:
+      helm:
+        releases:
+          - name: my-app-server
+            chartPath: ./helm-chart
+            valuesFiles:
+              - ./helm-chart/values.yaml
+            namespace: default
+            setValues:
+              client.enabled: false
+    portForward:
+      # Port forward only the server service
+      - resourceType: service
+        resourceName: my-app-server-server
+        namespace: default
+        port: 3000
+        localPort: 3000 # Forward to local port 3000

@@ -1,0 +1,61 @@
+# Default values for the application
+
+global:
+  environment: production
+
+client:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: my-app-client
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+  livenessProbe:
+    path: /
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readinessProbe:
+    path: /
+    initialDelaySeconds: 5
+    periodSeconds: 5
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+server:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: my-app-server
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 3000
+    targetPort: 3000
+  livenessProbe:
+    path: /health
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readinessProbe:
+    path: /health
+    initialDelaySeconds: 5
+    periodSeconds: 5
+  env:
+    NODE_ENV: production
+    PORT: 3000
+  resources:
+    limits:
+      cpu: 300m
+      memory: 512Mi
+    requests:
+      cpu: 150m
+      memory: 256Mi

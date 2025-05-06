@@ -1,0 +1,43 @@
+{{- if .Values.server.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-server
+  labels:
+    app: {{ .Release.Name }}-server
+spec:
+  replicas: {{ .Values.server.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-server
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-server
+    spec:
+      containers:
+        - name: server
+          image: "{{ .Values.server.image.repository }}:{{ .Values.server.image.tag }}"
+          imagePullPolicy: {{ .Values.server.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.server.service.targetPort }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.server.service.targetPort }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.server.service.targetPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          env:
+            {{- range $key, $value := .Values.server.env }}
+            - name: {{ $key }}
+              value: "{{ $value }}"
+            {{- end }}
+          resources:
+            {{- toYaml .Values.server.resources | nindent 12 }}
+{{- end }}
