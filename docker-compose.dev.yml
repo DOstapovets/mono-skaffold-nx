@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: apps/client/Dockerfile
+      target: development
+    volumes:
+      - ./packages/common:/app/packages/common
+      - ./apps/client:/app/apps/client
+      - /app/apps/client/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_BACKEND_URL=http://localhost:3000
+    command: yarn dev
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: .
+      dockerfile: apps/server/Dockerfile
+      target: development
+    volumes:
+      - ./packages/common:/app/packages/common
+      - ./apps/server:/app/apps/server
+      - /app/apps/server/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"]
+    command: yarn dev
