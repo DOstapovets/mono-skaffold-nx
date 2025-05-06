@@ -9,6 +9,13 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 * test ([de3a62e](https://github.com/DOstapovets/mono-skaffold-nx/commit/de3a62e3489215523ce40b26c9c0aae813de963b))
 
+## [0.1.1](https://github.com/DOstapovets/mono-skaffold-nx/compare/client-0.1.0...client-0.1.1) (2025-05-06)
+
+
+### Bug Fixes
+
+* test ([de3a62e](https://github.com/DOstapovets/mono-skaffold-nx/commit/de3a62e3489215523ce40b26c9c0aae813de963b))
+
 ## 0.1.0 (2025-05-06)
 
 
