@@ -1,0 +1,4 @@
+{
+  "name": "skaffold-p-m",
+  "packageManager": "yarn@4.6.0"
+}
