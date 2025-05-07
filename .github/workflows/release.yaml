@@ -41,7 +41,8 @@ jobs:
         run: |
           git config user.name "GitHub Bot"
           git config user.email "gituser@example.com"
-      
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
