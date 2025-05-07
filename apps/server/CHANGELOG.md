@@ -34,7 +34,7 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 ### Dependency Updates
 
-* `@skaffold-p-m/common` updated to version `0.1.0`
+* `@mono-skaffold-nx/common` updated to version `0.1.0`
 
 ### Features
 
@@ -51,7 +51,7 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 ### Dependency Updates
 
-* `@skaffold-p-m/common` updated to version `0.1.0`
+* `@mono-skaffold-nx/common` updated to version `0.1.0`
 
 ### Features
 
@@ -68,7 +68,7 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 ### Dependency Updates
 
-* `@skaffold-p-m/common` updated to version `0.1.0`
+* `@mono-skaffold-nx/common` updated to version `0.1.0`
 
 ### Features
 

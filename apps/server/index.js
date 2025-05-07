@@ -1,7 +1,7 @@
 // Server entry point with Express
 const express = require('express');
 const cors = require('cors');
-const { formatDate } = require('@skaffold-p-m/common');
+const { formatDate } = require('@mono-skaffold-nx/common');
 const apiRoutes = require('./routes/api');
 
 // Initialize Express app

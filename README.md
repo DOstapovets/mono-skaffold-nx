@@ -1,4 +1,4 @@
-# skaffold-p-m
+# mono-skaffold-nx
 
 ## Yarn Workspaces Project
 

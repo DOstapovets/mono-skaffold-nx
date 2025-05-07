@@ -1,5 +1,5 @@
 {
-  "name": "skaffold-p-m",
+  "name": "mono-skaffold-nx",
   "private": true,
   "workspaces": [
     "apps/*",

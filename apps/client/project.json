@@ -28,7 +28,7 @@
       "defaultConfiguration": "local",
       "options": {
         "push": true,
-        "tags": ["ghcr.io/dostapovets/skaffold-p-m-client:latest"]
+        "tags": ["ghcr.io/dostapovets/mono-skaffold-nx-client:latest"]
       }
     },
       "serve": {

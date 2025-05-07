@@ -1,5 +1,5 @@
 {
-  "name": "@skaffold-p-m/common",
+  "name": "@mono-skaffold-nx/common",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
