@@ -5,7 +5,7 @@ metadata:
 
 build:
   artifacts:
-    - image: ghcr.io/your-username/my-app-client
+    - image: ghcr.io/dostapovets/mono-skaffold-nx-client
       context: .
       docker:
         dockerfile: apps/client/Dockerfile
@@ -16,7 +16,7 @@ build:
             dest: .
           - src: packages/**/*
             dest: .
-    - image: ghcr.io/your-username/my-app-server
+    - image: ghcr.io/dostapovets/mono-skaffold-nx-server
       docker:
         dockerfile: apps/server/Dockerfile
         target: "production"
