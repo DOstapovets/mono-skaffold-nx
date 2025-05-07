@@ -4,12 +4,14 @@
   "sourceRoot": "apps/client/src",
   "targets": {
     "build": {
+      "dependsOn": ["lint"],
       "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "skipTypeCheck": true,
-        "outputPath": "apps/client/dist"
+        "outputPath": "apps/client/dist",
+        "root": "apps/client"
       },
       "configurations": {
         "development": {
@@ -20,7 +22,16 @@
         }
       }
     },
-    "serve": {
+    "container": {
+      "executor": "@nx-tools/nx-container:build",
+      "dependsOn": ["build"],
+      "defaultConfiguration": "local",
+      "options": {
+        "push": true,
+        "tags": ["ghcr.io/dostapovets/skaffold-p-m-client:latest"]
+      }
+    },
+      "serve": {
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
@@ -52,27 +63,22 @@
         }
       }
     },
-    "test": {
-      "executor": "@nx/vite:test",
-      "outputs": ["{projectRoot}/coverage"],
-      "options": {
-        "passWithNoTests": true
-      }
-    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
+        "skipTypeCheck": true,
         "lintFilePatterns": ["apps/client/**/*.{js,ts,jsx,tsx}"]
       }
     },
     "version": {
       "executor": "@jscutlery/semver:version",
+      "dependsOn": ["build"],
       "options": {
         "preset": "conventional",
         "trackDeps": true,
         "push": true,
-        "postTargets": ["build", "github"]
+        "postTargets": ["container", "github"]
       }
     },
     "github": {

@@ -5,7 +5,7 @@ metadata:
 
 build:
   artifacts:
-    - image: my-app-client
+    - image: ghcr.io/your-username/my-app-client
       context: .
       docker:
         dockerfile: apps/client/Dockerfile
@@ -16,7 +16,7 @@ build:
             dest: .
           - src: packages/**/*
             dest: .
-    - image: my-app-server
+    - image: ghcr.io/your-username/my-app-server
       docker:
         dockerfile: apps/server/Dockerfile
         target: "production"
