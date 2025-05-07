@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.3](https://github.com/DOstapovets/mono-skaffold-nx/compare/server-0.1.2...server-0.1.3) (2025-05-07)
+
+
+### Bug Fixes
+
+* add docker workflow ([63080fb](https://github.com/DOstapovets/mono-skaffold-nx/commit/63080fb239c339fe1bd1507e28f0a5b5edbc174a))
+
 ## [0.1.2](https://github.com/DOstapovets/mono-skaffold-nx/compare/server-0.1.1...server-0.1.2) (2025-05-06)
 
 
