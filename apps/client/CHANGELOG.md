@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.10](https://github.com/DOstapovets/mono-skaffold-nx/compare/client-0.1.9...client-0.1.10) (2025-05-08)
+
+
+### Bug Fixes
+
+* test ([fc8723e](https://github.com/DOstapovets/mono-skaffold-nx/commit/fc8723e340fa6bff00ecbb2b3e4155e3403cfa56))
+
 ## [0.1.9](https://github.com/DOstapovets/mono-skaffold-nx/compare/client-0.1.8...client-0.1.9) (2025-05-07)
 
 
