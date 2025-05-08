@@ -13,18 +13,37 @@
     "container": {
       "executor": "@nx-tools/nx-container:build",
       "dependsOn": ["build"],
-      "defaultConfiguration": "local",
+      "defaultConfiguration": "development",
       "options": {
-        "tags": ["ghcr.io/dostapovets/mono-skaffold-nx-server:latest"]
+        "load": true
       },
       "configurations": {
         "development": {
           "push": false,
-          "target": "development"
+          "target": "development",
+          "metadata": {
+            "images": ["ghcr.io/dostapovets/mono-skaffold-nx-server"],
+            "tags": ["latest"]
+          }
         },
         "production": {
           "push": true,
-          "target": "production"
+          "target": "production",
+          "metadata": {
+            "images": ["ghcr.io/dostapovets/mono-skaffold-nx-server"],
+            "tags": [
+              "type=schedule",
+              "type=ref,event=branch",
+              "type=ref,event=tag",
+              "type=ref,event=pr",
+              "type=semver,pattern={{version}}",
+              "type=semver,pattern={{major}}.{{minor}}",
+              "type=semver,pattern={{major}}",
+              "type=sha,prefix=sha-",
+              "type=raw,value=build-$DATE",
+"type=raw,enable=true,priority=200,prefix=foo,suffix=test,value=bar-$DATE"
+            ]
+          }
         }
       }
     },
