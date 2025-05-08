@@ -49,7 +49,7 @@ jobs:
       
       - name: Version
         shell: bash
-        run: yarn nx affected --base=latest --target=version
+        run: yarn nx affected --target=version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
