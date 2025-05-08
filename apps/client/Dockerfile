@@ -17,7 +17,7 @@ COPY apps/client ./apps/client/
 
 WORKDIR /app
 
-CMD ["yarn", "client"]
+CMD ["yarn","nx", "serve", "client"]
 
 # Production build stage
 FROM development AS build

@@ -4,7 +4,7 @@
   "version": "0.1.9",
   "type": "module",
   "scripts": {
-    "dev": "nx serve",
+    "dev": "nx serve client",
     "build": "nx vite:build",
     "lint": "eslint .",
     "preview": "nx vite:preview"

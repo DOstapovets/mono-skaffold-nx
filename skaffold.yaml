@@ -27,7 +27,6 @@ build:
             dest: .
           - src: packages/**/*
             dest: .
-
 deploy:
   helm:
     releases:
@@ -36,7 +35,11 @@ deploy:
         valuesFiles:
           - "./helm/env-values/{{ .ENV }}.yaml"
         namespace: default
-
+        setValueTemplates:
+          client.image.repository: "{{.IMAGE_REPO_ghcr_io_dostapovets_mono_skaffold_nx_client}}"
+          client.image.tag: "{{.IMAGE_TAG_ghcr_io_dostapovets_mono_skaffold_nx_client}}@{{.IMAGE_DIGEST_ghcr_io_dostapovets_mono_skaffold_nx_client}}"
+          server.image.repository: "{{.IMAGE_REPO_ghcr_io_dostapovets_mono_skaffold_nx_server}}"
+          server.image.tag: "{{.IMAGE_TAG_ghcr_io_dostapovets_mono_skaffold_nx_server}}@{{.IMAGE_DIGEST_ghcr_io_dostapovets_mono_skaffold_nx_server}}"
 # portForward:
   # Port forward the client service in dev mode
   # - resourceType: service

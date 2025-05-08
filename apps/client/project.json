@@ -25,13 +25,41 @@
     "container": {
       "executor": "@nx-tools/nx-container:build",
       "dependsOn": ["build"],
-      "defaultConfiguration": "local",
+      "defaultConfiguration": "development",
       "options": {
-        "push": true,
-        "tags": ["ghcr.io/dostapovets/mono-skaffold-nx-client:latest"]
+        "load": true
+      },
+      "configurations": {
+        "development": {
+          "push": false,
+          "target": "development",
+          "metadata": {
+            "images": ["ghcr.io/dostapovets/mono-skaffold-nx-client"],
+            "tags": ["latest"]
+          }
+        },
+        "production": {
+          "push": true,
+          "target": "production",
+          "metadata": {
+            "images": ["ghcr.io/dostapovets/mono-skaffold-nx-client"],
+            "tags": [
+              "type=schedule",
+              "type=ref,event=branch",
+              "type=ref,event=tag",
+              "type=ref,event=pr",
+              "type=semver,pattern={{version}}",
+              "type=semver,pattern={{major}}.{{minor}}",
+              "type=semver,pattern={{major}}",
+              "type=sha,prefix=sha-",
+              "type=raw,value=build-$DATE",
+"type=raw,enable=true,priority=200,prefix=foo,suffix=test,value=bar-$DATE"
+            ]
+          }
+        }
       }
     },
-      "serve": {
+    "serve": {
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
