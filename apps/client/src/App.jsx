@@ -6,7 +6,6 @@ function App() {
   const [refreshTodos, setRefreshTodos] = useState(false);
 
   const handleTodoAdded = () => {
-    // Trigger a refresh of the todo list
     setRefreshTodos(prev => !prev);
   };
 
