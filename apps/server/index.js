@@ -61,7 +61,6 @@ app.use((err, req, res, next) => {
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port http://localhost:${PORT}`);
-  console.log(`Current time: ${formatDate(new Date())}`);
   console.log(`API available at http://localhost:${PORT}/api`);
   console.log(`Health check at http://localhost:${PORT}/health`);
 });
