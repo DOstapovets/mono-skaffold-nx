@@ -1,0 +1,11 @@
+{
+  "builds": [
+    {
+      "imageName": "ghcr.io/dostapovets/mono-skaffold-nx-client",
+      "tag": "ghcr.io/dostapovets/mono-skaffold-nx-client:server-0.1.6-1-gf60f2f5"
+    }, {
+      "imageName": "ghcr.io/dostapovets/mono-skaffold-nx-server",
+      "tag": "ghcr.io/dostapovets/mono-skaffold-nx-server:server-0.1.6-1-gf60f2f5"
+    }
+  ]
+}

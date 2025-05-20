@@ -44,16 +44,12 @@
           "metadata": {
             "images": ["ghcr.io/dostapovets/mono-skaffold-nx-client"],
             "tags": [
-              "type=schedule",
-              "type=ref,event=branch",
-              "type=ref,event=tag",
-              "type=ref,event=pr",
-              "type=semver,pattern={{version}}",
-              "type=semver,pattern={{major}}.{{minor}}",
-              "type=semver,pattern={{major}}",
-              "type=sha,prefix=sha-",
-              "type=raw,value=build-$DATE",
-"type=raw,enable=true,priority=200,prefix=foo,suffix=test,value=bar-$DATE"
+            "type=semver,pattern={{version}}",
+            "type=semver,pattern={{major}}.{{minor}}",
+            "type=semver,pattern={{major}}",
+            "type=ref,event=branch",
+            "type=ref,event=tag",
+            "type=sha,prefix=sha-"
             ]
           }
         }
@@ -106,7 +102,7 @@
         "preset": "conventional",
         "trackDeps": true,
         "push": true,
-        "postTargets": ["container", "github"]
+        "postTargets": ["client:container:production", "github"]
       }
     },
     "github": {
