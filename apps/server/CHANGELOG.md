@@ -1,3 +1,13 @@
+## 0.1.8 (2025-05-20)
+
+### 🩹 Fixes
+
+- test ([2cfbc77](https://github.com/DOstapovets/mono-skaffold-nx/commit/2cfbc77))
+
+### ❤️ Thank You
+
+- Dmytro Ostapovets
+
 
 ## [0.1.7](https://github.com/DOstapovets/mono-skaffold-nx/compare/server-0.1.6...server-0.1.7) (2025-05-20)
 
