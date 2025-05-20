@@ -7,14 +7,6 @@
       ],
       "cache": true
     },
-    "version": {
-      "executor": "@jscutlery/semver:version",
-      "options": {
-        "push": true,
-        "baseBranch": "master",
-        "postTargets": ["github"]
-      }
-    },
     "github": {
       "executor": "@jscutlery/semver:github",
       "options": {
@@ -39,5 +31,26 @@
         "watchDepsTargetName": "watch-deps"
       }
     }
-  ]
+  ],
+  "release": {
+    "releaseTagPattern": "{projectName}-{version}",
+    "projects": [
+      "client",
+      "server"
+    ],
+    "projectsRelationship": "independent",
+    "version": {
+      "preVersionCommand": "yarn nx run-many -t build",
+      "conventionalCommits": true
+    },
+    "git": {
+      "commit": true
+    },
+    "changelog": {
+      "automaticFromRef": true,
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
+    }
+  }
 }

@@ -1,6 +1,3 @@
-# Changelog
-
-This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
 ## [0.1.7](https://github.com/DOstapovets/mono-skaffold-nx/compare/server-0.1.6...server-0.1.7) (2025-05-20)
 

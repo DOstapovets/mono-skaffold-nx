@@ -1,6 +1,3 @@
-# Changelog
-
-This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
 ## [0.1.11](https://github.com/DOstapovets/mono-skaffold-nx/compare/client-0.1.10...client-0.1.11) (2025-05-20)
 

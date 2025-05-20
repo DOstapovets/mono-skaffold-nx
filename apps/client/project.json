@@ -1,12 +1,18 @@
 {
   "name": "client",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/client/src",
+  "tags": [],
   "targets": {
     "build": {
-      "dependsOn": ["lint"],
+      "dependsOn": [
+        "lint"
+      ],
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "skipTypeCheck": true,
@@ -24,7 +30,9 @@
     },
     "container": {
       "executor": "@nx-tools/nx-container:build",
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "defaultConfiguration": "development",
       "options": {
         "load": true
@@ -34,22 +42,28 @@
           "push": false,
           "target": "development",
           "metadata": {
-            "images": ["ghcr.io/dostapovets/mono-skaffold-nx-client"],
-            "tags": ["latest"]
+            "images": [
+              "ghcr.io/dostapovets/mono-skaffold-nx-client"
+            ],
+            "tags": [
+              "latest"
+            ]
           }
         },
         "production": {
           "push": true,
           "target": "production",
           "metadata": {
-            "images": ["ghcr.io/dostapovets/mono-skaffold-nx-client"],
+            "images": [
+              "ghcr.io/dostapovets/mono-skaffold-nx-client"
+            ],
             "tags": [
-            "type=semver,pattern={{version}}",
-            "type=semver,pattern={{major}}.{{minor}}",
-            "type=semver,pattern={{major}}",
-            "type=ref,event=branch",
-            "type=ref,event=tag",
-            "type=sha,prefix=sha-"
+              "type=semver,pattern={{version}}",
+              "type=semver,pattern={{major}}.{{minor}}",
+              "type=semver,pattern={{major}}",
+              "type=ref,event=branch",
+              "type=ref,event=tag",
+              "type=sha,prefix=sha-"
             ]
           }
         }
@@ -89,29 +103,15 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
         "skipTypeCheck": true,
-        "lintFilePatterns": ["apps/client/**/*.{js,ts,jsx,tsx}"]
-      }
-    },
-    "version": {
-      "executor": "@jscutlery/semver:version",
-      "dependsOn": ["build"],
-      "options": {
-        "preset": "conventional",
-        "trackDeps": true,
-        "push": true,
-        "postTargets": ["client:container:production", "github"]
-      }
-    },
-    "github": {
-      "executor": "@jscutlery/semver:github",
-      "options": {
-        "tag": "{tag}",
-        "notes": "{notes}"
+        "lintFilePatterns": [
+          "apps/client/**/*.{js,ts,jsx,tsx}"
+        ]
       }
     }
-  },
-  "tags": []
+  }
 }

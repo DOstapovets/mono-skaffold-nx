@@ -12,7 +12,6 @@
     "test": "yarn workspaces run test"
   },
   "devDependencies": {
-    "@jscutlery/semver": "^5.6.0",
     "@nx-tools/nx-container": "^6.2.0",
     "@nx/eslint": "^21.0.0",
     "@nx/vite": "21.0.0",
