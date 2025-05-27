@@ -25,7 +25,7 @@
     "extract-version": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node utils/extract_version.js {projectName}"
+        "command": "source <(node utils/extract_version.js {projectName})"
       }
     }
   },

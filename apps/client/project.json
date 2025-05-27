@@ -50,8 +50,8 @@
               "type=ref,event=pr",
               "type=raw,value=latest,enable={{is_default_branch}}",
               "type=sha",
-              "type=raw,value=$VERSION",
-              "type=raw,value=$VERSION_MAJOR.$VERSION_MINOR"
+              "$VERSION",
+              "$VERSION_MAJOR.$VERSION_MINOR"
             ]
           }
         }
