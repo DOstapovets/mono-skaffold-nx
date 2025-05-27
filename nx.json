@@ -1,18 +1,5 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "release": {
-    "projects": ["apps/**"],
-    "projectsRelationship": "independent",
-    "releaseTagPattern": "{projectName}-{version}",
-    "version": {
-      "conventionalCommits": true
-    },
-    "changelog": {
-      "projectChangelogs": {
-        "createRelease": "github"        
-      }
-    }
-  },
   "targetDefaults": {
     "build": {
       "outputs": [
@@ -33,6 +20,12 @@
       "options": {
         "tag": "{tag}",
         "notes": "{notes}"
+      }
+    },
+    "extract-version": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node utils/extract_version.js {projectName}"
       }
     }
   },
