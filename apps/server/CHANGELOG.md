@@ -1,3 +1,13 @@
+## 0.2.0 (2025-05-27)
+
+### 🚀 Features
+
+- test ([1a8aa46](https://github.com/DOstapovets/mono-skaffold-nx/commit/1a8aa46))
+
+### ❤️ Thank You
+
+- Dmytro Ostapovets
+
 # Changelog
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
