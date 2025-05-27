@@ -51,7 +51,7 @@ jobs:
         shell: bash
         run: yarn nx affected --base=latest --target=version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Tag latest
         shell: bash
