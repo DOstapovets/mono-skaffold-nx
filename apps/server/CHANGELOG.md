@@ -1,3 +1,14 @@
+# Changelog
+
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+## [0.2.1](https://github.com/DOstapovets/mono-skaffold-nx/compare/server-0.2.0...server-0.2.1) (2025-05-27)
+
+
+### Bug Fixes
+
+* minor ([24738a9](https://github.com/DOstapovets/mono-skaffold-nx/commit/24738a976d95a0dd7129f6fb8ba3609bc23188dc))
+
 ## 0.2.0 (2025-05-27)
 
 ### 🚀 Features
