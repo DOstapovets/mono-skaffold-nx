@@ -37,9 +37,9 @@
               "type=ref,event=tag",
               "type=ref,event=pr",
               "type=raw,value=latest,enable={{is_default_branch}}",
-              "type=semver,pattern=$VERSION",
-              "type=semver,pattern=$VERSION_MAJOR.VERSION_MAJOR",
-              "type=semver,pattern=$VERSION_MAJOR",
+              "type=sha",
+              "type=raw,value=$VERSION",
+              "type=raw,value=$VERSION_MAJOR.$VERSION_MINOR",
               "type=sha"
             ]
           }

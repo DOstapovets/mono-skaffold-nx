@@ -24,7 +24,7 @@
     },
     "container": {
       "executor": "@nx-tools/nx-container:build",
-      "dependsOn": ["build"],
+      "dependsOn": ["build" , "extract-version"],
       "defaultConfiguration": "production",
       "options": {
         "load": true
@@ -49,10 +49,9 @@
               "type=ref,event=tag",
               "type=ref,event=pr",
               "type=raw,value=latest,enable={{is_default_branch}}",
-              "type=semver,pattern={{version}}",
-              "type=semver,pattern={{major}}.{{minor}}",
-              "type=semver,pattern={{major}}",
-              "type=sha"
+              "type=sha",
+              "type=raw,value=$VERSION",
+              "type=raw,value=$VERSION_MAJOR.$VERSION_MINOR"
             ]
           }
         }
