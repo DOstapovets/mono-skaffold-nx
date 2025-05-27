@@ -107,7 +107,7 @@
         "trackDeps": true,
         "push": true,
         
-        "postTargets": ["container:production", "github"]
+        "postTargets": ["container", "github"]
       }
     },
     "github": {
