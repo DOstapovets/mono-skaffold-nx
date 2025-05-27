@@ -25,7 +25,7 @@
     "container": {
       "executor": "@nx-tools/nx-container:build",
       "dependsOn": ["build"],
-      "defaultConfiguration": "development",
+      "defaultConfiguration": "production",
       "options": {
         "load": true
       },
@@ -106,7 +106,8 @@
         "preset": "conventional",
         "trackDeps": true,
         "push": true,
-        "postTargets": ["container", "github"]
+        
+        "postTargets": ["container:production", "github"]
       }
     },
     "github": {

@@ -13,7 +13,7 @@
     "container": {
       "executor": "@nx-tools/nx-container:build",
       "dependsOn": ["build"],
-      "defaultConfiguration": "development",
+      "defaultConfiguration": "production",
       "options": {
         "load": true
       },
