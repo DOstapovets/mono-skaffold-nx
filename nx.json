@@ -2,13 +2,15 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "release": {
     "projects": ["apps/**"],
+    "projectsRelationship": "independent",
+    "releaseTagPattern": "{projectName}-{version}",
     "version": {
       "conventionalCommits": true
     },
     "changelog": {
-        "workspaceChangelog": {
-            "createRelease": "github"
-        }
+      "projectChangelogs": {
+        "createRelease": "github"        
+      }
     }
   },
   "targetDefaults": {
