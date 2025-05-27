@@ -2,6 +2,11 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.1.11](https://github.com/DOstapovets/mono-skaffold-nx/compare/server-0.1.10...server-0.1.11) (2025-05-27)
+
+### Dependency Updates
+
+* `@mono-skaffold-nx/common` updated to version `0.1.0`
 ## [0.1.10](https://github.com/DOstapovets/mono-skaffold-nx/compare/server-0.1.9...server-0.1.10) (2025-05-27)
 
 
