@@ -3,46 +3,17 @@
   "projectType": "application",
   "sourceRoot": "apps/server",
   "targets": {
+    "docker-publish": {
+      "executor": "nx:run-commands",
+      "options": { 
+        "command": "bash -c 'node utils/docker/publish.js {projectName}'"
+      }
+    },
     "serve": {
       "executor": "nx:run-commands",
       "options": {
         "command": "node index.js",
         "cwd": "apps/server"
-      }
-    },
-    "container": {
-      "executor": "@nx-tools/nx-container:build",
-      "dependsOn": ["build" , "extract-version"],
-      "defaultConfiguration": "production",
-      "options": {
-        "load": true
-      },
-      "configurations": {
-        "development": {
-          "push": false,
-          "target": "development",
-          "metadata": {
-            "images": ["ghcr.io/dostapovets/mono-skaffold-nx-server"],
-            "tags": ["latest"]
-          }
-        },
-        "production": {
-          "push": true,
-          "target": "production",
-          "metadata": {
-            "images": ["ghcr.io/dostapovets/mono-skaffold-nx-server"],
-            "tags": [
-              "type=schedule",
-              "type=ref,event=branch",
-              "type=ref,event=tag",
-              "type=ref,event=pr",
-              "type=raw,value=latest,enable={{is_default_branch}}",
-              "type=sha",
-              "$VERSION",
-              "$VERSION_MAJOR.$VERSION_MINOR"
-            ]
-          }
-        }
       }
     },
     "dev": {
@@ -58,7 +29,7 @@
         "preset": "conventional",
         "trackDeps": true,
         "push": true,
-        "postTargets": ["container", "github"]
+        "postTargets": ["docker-publish", "github"]
       }
     },
     "github": {
