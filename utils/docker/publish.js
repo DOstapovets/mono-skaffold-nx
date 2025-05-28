@@ -42,24 +42,25 @@ execSync(
   { stdio: 'inherit' }
 );
 
-if (process.env.INPUT_IS_DEFAULT === 'true') {
+if (process.env.INPUT_IS_DEFAULT_BRANCH === 'true') {
   execSync(
     `docker push ghcr.io/dostapovets/mono-skaffold-nx-${projectName}:latest`,
     { stdio: 'inherit' }
   );
+  console.log(`Docker image ${imageName}:latest built and pushed successfully.`);
 }
 execSync(
   `docker push ghcr.io/dostapovets/mono-skaffold-nx-${projectName}:${version}`,
   { stdio: 'inherit' }
 );
+console.log(`Docker image ${imageName}:${version} built and pushed successfully.`);
 execSync(
   `docker push ghcr.io/dostapovets/mono-skaffold-nx-${projectName}:${major}`,
   { stdio: 'inherit' }
 );
+console.log(`Docker image ${imageName}/${major} built and pushed successfully.`);
 execSync(
   `docker push ghcr.io/dostapovets/mono-skaffold-nx-${projectName}:${major}.${minor}`,
   { stdio: 'inherit' }
 );
-console.log(`Docker image ${imageName}:${version} built and pushed successfully.`);
-console.log(`Docker image ${imageName}/${major} built and pushed successfully.`);
 console.log(`Docker image ${imageName}/${major}:${minor} built and pushed successfully.`);
