@@ -7,7 +7,7 @@ client:
   enabled: true
   replicaCount: 1
   image:
-    repository: my-app-client
+    repository: ghcr.io/dostapovets/mono-skaffold-nx-server
     tag: latest
     pullPolicy: IfNotPresent
   service:
@@ -21,7 +21,7 @@ client:
   readinessProbe:
     path: /
     initialDelaySeconds: 30
-    periodSeconds: 30
+    periodSeconds: 10
   resources:
     limits:
       cpu: 200m
@@ -34,7 +34,7 @@ server:
   enabled: true
   replicaCount: 1
   image:
-    repository: my-app-server
+    repository: ghcr.io/dostapovets/mono-skaffold-nx-server
     tag: latest
     pullPolicy: IfNotPresent
   service:
