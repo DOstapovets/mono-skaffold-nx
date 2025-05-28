@@ -2,11 +2,11 @@
   "builds": [
     {
       "imageName": "ghcr.io/dostapovets/mono-skaffold-nx-client",
-      "tag": "ghcr.io/dostapovets/mono-skaffold-nx-client:latest"
+      "tag": "ghcr.io/dostapovets/mono-skaffold-nx-client:0.2.3"
     },
     {
       "imageName": "ghcr.io/dostapovets/mono-skaffold-nx-server",
-      "tag": "ghcr.io/dostapovets/mono-skaffold-nx-server:latest"
+      "tag": "ghcr.io/dostapovets/mono-skaffold-nx-server:0.2.5"
     }
   ]
 }
