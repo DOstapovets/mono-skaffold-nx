@@ -25,18 +25,29 @@ const [major, minor] = version.split(".");
 
 // Print as shell export statements
 execSync(
-  `docker build -f ${dockerfile} . --tag ${imageName}:${version} --target production`,
+  `docker build -f ${dockerfile} . --tag ${imageName}:latest --target production`,
   { stdio: 'inherit' }
 );
 
 execSync(
-  `docker image tag ${imageName}:${version} ${imageName}:${major}`,
+  `docker image tag ${imageName}:latest ${imageName}:${version}`,
   { stdio: 'inherit' }
 );
 execSync(
-  `docker image tag ${imageName}:${version} ${imageName}:${major}.${minor}`,
+  `docker image tag ${imageName}:latest ${imageName}:${major}`,
   { stdio: 'inherit' }
 );
+execSync(
+  `docker image tag ${imageName}:latest ${imageName}:${major}.${minor}`,
+  { stdio: 'inherit' }
+);
+
+if (process.env.INPUT_IS_DEFAULT === 'true') {
+  execSync(
+    `docker push ghcr.io/dostapovets/mono-skaffold-nx-${projectName}:latest`,
+    { stdio: 'inherit' }
+  );
+}
 execSync(
   `docker push ghcr.io/dostapovets/mono-skaffold-nx-${projectName}:${version}`,
   { stdio: 'inherit' }
