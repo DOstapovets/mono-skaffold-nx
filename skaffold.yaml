@@ -4,6 +4,11 @@ metadata:
   name: my-app
 
 build:
+  tagPolicy:
+    sha256: {}
+  local:
+    concurrency: 0
+    push: false
   artifacts:
     - image: ghcr.io/dostapovets/mono-skaffold-nx-client
       context: .

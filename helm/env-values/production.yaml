@@ -1,10 +1,9 @@
-# Production environment configuration values
-
-# Replicas for each service
-replicas:
-  client: 3
-  server: 3
-
+client: 
+  image:
+    tag: "0.2"
+server:
+  image:
+    tag: "0.2"
 # Resource limits and requests
 resources:
   client:
