@@ -8,7 +8,7 @@ build:
     sha256: {}
   local:
     concurrency: 0
-    push: false
+    # push: true
   artifacts:
     - image: ghcr.io/dostapovets/mono-skaffold-nx-client
       context: .
